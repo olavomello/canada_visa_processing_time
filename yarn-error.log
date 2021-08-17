@@ -1,0 +1,75 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js start-dev
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Python39\Scripts\;C:\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\OpenSSL-Win64\bin;C:\Program Files\dotnet\;C:\Users\olavo\.windows-build-tools\python27\;C:\Users\olavo\.windows-build-tools\python27\;C:\Users\olavo\.windows-build-tools\python27\;C:\Users\olavo\AppData\Local\Microsoft\WindowsApps;C:\Users\olavo\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\olavo\AppData\Roaming\npm;C:\Program Files (x86)\GitHub CLI\;C:\Users\olavo\AppData\Local\Yarn\bin;C:\platform-tools;C:\Program Files\TestProject Agent;C:\Program Files\OpenSSL-Win64\bin;C:\Users\olavo\.dotnet\tools
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  14.15.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\olavo\package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "canada-visa-processing-time",
+    "version": "1.0.0",
+    "description": "Canada Visa Proccessing Time Checker",
+    "main": "app.js",
+    "scripts": {
+      "start-dev": "tsc && node ./dist/app.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/olavomello/canada_visa_processing_time.git"
+    },
+    "keywords": [
+      "visa",
+      "canada",
+      "processing",
+      "time",
+      "date",
+      "study",
+      "visa",
+      "work",
+      "visa",
+      "super",
+      "visa",
+      "visit",
+      "visa"
+    ],
+    "author": "Olavo Mello",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/olavomello/canada_visa_processing_time/issues"
+    },
+    "homepage": "https://github.com/olavomello/canada_visa_processing_time#readme",
+    "devDependencies": {
+      "@types/cors": "^2.8.12",
+      "@types/express": "^4.16.1",
+      "tslint": "^5.12.1",
+      "typescript": "^3.3.3"
+    },
+    "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.16.4",
+      "fs": "^0.0.1-security"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
