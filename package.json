@@ -5,7 +5,7 @@
   "main": "./dist/app.js",
   "scripts": {
     "start-dev": "tsc && node ./dist/app.js",
-    "start": "node ./dist/app.js"
+    "start": "ts-node ./dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
     "express": "^4.16.4",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "ts-node": "^10.2.0"
   }
 }
