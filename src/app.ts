@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Cors options for cors midddleware
 // List of allowed origins
-const allowedOrigins = ['http://localhost:'+port,'https://localhost:'+port,"https://canada-visa-processing-time.vercel.app:"+port,"https://canada-visa-processing-time.vercel.app",'*'];
+const allowedOrigins = ['http://localhost:'+port,'https://localhost:'+port,"https://canada-visa-processing-time.vercel.app:"+port,"https://canada-visa-processing-time.vercel.app","https://canada-visa-processing-time.herokuapp.com","*"];
 
 // Cor options
 const corsOptions: cors.CorsOptions = {
