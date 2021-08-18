@@ -4,7 +4,8 @@
   "description": "Canada Visa Proccessing Time Checker",
   "main": "app.js",
   "scripts": {
-    "start-dev": "tsc && node ./dist/app.js"   
+    "start-dev": "tsc && node ./dist/app.js",
+    "start": "node ./dist/app.js"   
   },
   "repository": {
     "type": "git",
