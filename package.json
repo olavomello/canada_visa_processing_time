@@ -6,7 +6,8 @@
   "scripts": {
     "start-dev": "tsc && node ./dist/app.js",
     "build": "tsc",
-    "start": "ts-node ./dist/app.js"
+    "postinstall": "npm run build",
+    "start": "node ./dist/app.js"
   },
   "repository": {
     "type": "git",
