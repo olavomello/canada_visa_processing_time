@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js start-dev
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js start
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Python39\Scripts\;C:\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\OpenSSL-Win64\bin;C:\Program Files\dotnet\;C:\Users\olavo\.windows-build-tools\python27\;C:\Users\olavo\.windows-build-tools\python27\;C:\Users\olavo\.windows-build-tools\python27\;C:\Users\olavo\AppData\Local\Microsoft\WindowsApps;C:\Users\olavo\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\olavo\AppData\Roaming\npm;C:\Program Files (x86)\GitHub CLI\;C:\Users\olavo\AppData\Local\Yarn\bin;C:\platform-tools;C:\Program Files\TestProject Agent;C:\Program Files\OpenSSL-Win64\bin;C:\Users\olavo\.dotnet\tools
@@ -26,9 +26,10 @@ npm manifest:
     "name": "canada-visa-processing-time",
     "version": "1.0.0",
     "description": "Canada Visa Proccessing Time Checker",
-    "main": "app.js",
+    "main": "./dist/app.js",
     "scripts": {
-      "start-dev": "tsc && node ./dist/app.js"
+      "start-dev": "tsc && node ./dist/app.js",
+      "start": "ts-node ./dist/app.js"
     },
     "repository": {
       "type": "git",
@@ -63,8 +64,10 @@ npm manifest:
     },
     "dependencies": {
       "cors": "^2.8.5",
+      "dotenv-safe": "^8.2.0",
       "express": "^4.16.4",
-      "fs": "^0.0.1-security"
+      "fs": "^0.0.1-security",
+      "ts-node": "^10.2.0"
     }
   }
 
