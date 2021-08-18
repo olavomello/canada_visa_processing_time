@@ -1,5 +1,7 @@
 {
-    "redirects": [
-      { "source": "/", "destination": "/public_html/index.html" }
+    "name": "canada-visa-processing-time",
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/", "status": 200, "dest": "/public_html/index.html" }
     ]
-  }
+}
