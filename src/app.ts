@@ -1,4 +1,4 @@
-// 
+if ( process.env.NODE_ENV != 'production' )  require('dotenv-safe').config({ silent: true });
 import express from 'express';
 import http from "http";
 import https from "https";
