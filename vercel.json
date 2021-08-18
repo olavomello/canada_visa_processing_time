@@ -1,7 +1,9 @@
 {
     "name": "canada-visa-processing-time",
+    "public": true,
+    "cleanUrls": true,
     "routes": [
-        { "handle": "filesystem" },
-        { "src": "/", "status": 200, "dest": "/public_html/index.html" }
+        { "src": "/", "status": 200, "dest": "/public_html/index.html" },
+        { "src": "/.*","status": 200,  "dest": "/public_html/index.html"}
     ]
 }
