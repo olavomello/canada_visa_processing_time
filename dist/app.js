@@ -3,18 +3,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// 
+if (process.env.NODE_ENV != 'production')
+    require('dotenv-safe').config({ silent: true });
 const express_1 = __importDefault(require("express"));
 const https_1 = __importDefault(require("https"));
 const cors_1 = __importDefault(require("cors"));
 // Start server
 const app = express_1.default();
-const port = 3000;
+const port = (process.env.PORT || 3001);
 // Receive JSON
 app.use(express_1.default.json());
 // Cors options for cors midddleware
 // List of allowed origins
-const allowedOrigins = ['http://localhost:' + port, 'https://localhost:' + port, "https://canada-visa-processing-time.vercel.app:" + port, "https://canada-visa-processing-time.vercel.app", '*'];
+const allowedOrigins = ['http://localhost:' + port, 'https://localhost:' + port, "https://canada-visa-processing-time.vercel.app:" + port, "https://canada-visa-processing-time.vercel.app", "https://canada-visa-processing-time.herokuapp.com", "*"];
 // Cor options
 const corsOptions = {
     allowedHeaders: [
