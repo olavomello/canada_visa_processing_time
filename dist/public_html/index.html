@@ -170,27 +170,6 @@
             }
 
     </style>
-    <script>
-        // Get data
-        async function populate(){
-            // Endpoint
-            const endPoint = "/get";
-            // Get data
-            const res   =   await fetch(endPoint);
-            const data  =   await res.json();
-            // Populate to page
-            for (const i in data){
-                var idx     = i;          console.log("idx",idx);
-                var idxVal  = data[i];    console.log("idxVal",idxVal);
-
-                // No processing time available
-                if( idxVal == "No processing time available" ) idxVal = "Unavailable";
-
-                // Apply data
-                document.getElementById(idx).innerHTML = idxVal;
-            }
-        }
-    </script>
 </head>
 <body onLoad="populate()">
     <div id="main">
@@ -212,5 +191,26 @@
             <br>My contribution to all dreamers | <a href="https://github.com/olavomello" target="_blank">Olavo Mello</a>
         </div>
     </div>
+    <script>
+        // Get data
+        async function populate(){
+            // Endpoint
+            const endPoint = "/get";
+            // Get data
+            const res   =   await fetch(endPoint);
+            const data  =   await res.json();
+            // Populate to page
+            for (const i in data){
+                var idx     = i;          console.log("idx",idx);
+                var idxVal  = data[i];    console.log("idxVal",idxVal);
+
+                // No processing time available
+                if( idxVal == "No processing time available" ) idxVal = "Unavailable";
+
+                // Apply data
+                document.getElementById(idx).innerHTML = idxVal;
+            }
+        }
+    </script>    
 </body>
 </html>

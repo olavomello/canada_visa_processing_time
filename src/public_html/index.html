@@ -4,10 +4,213 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title>Canadá Visa - Processing Time - Brazil</title>
+    <style>
+        *{
+            font-family: 'Roboto', sans-serif;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition:    all .3s ease-in-out;
+            -o-transition:      all .3s ease-in-out;
+            -ms-transition:     all .3s ease-in-out;
+            transition:         all .3s ease-in-out;            
+        }
+        body{
+            background: #f0f0f0;
+        }
+        h1{
+            font-size:20px;
+            text-align: center;
+        }
+        a{
+            color:#000;
+            text-decoration:none;
+        }
+        a:hover{
+            color:#c72020;
+            text-decoration: underline;
+        }
+        #main{
+            width: 50%;
+            margin:10% auto;
+            border-radius:5px;
+            border:1px solid #e0e0e0;
+            padding:30px;
+            text-align:center;
+            display: block;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.096);
+            border-top:5px solid #c72020;
+        }
+            #main #flag{
+                width:100px;
+                margin:5% auto;
+                display: block;
+            }
+            #main ul{
+                display: inline-block;
+                margin: 0;
+                padding:10px;
+                list-style: none;
+                font-size: 14px;
+                font-weight: bold;
+            }
+                #main ul li{
+                    float: left;
+                    width:33%;
+                    height:60px;
+                    margin:5%;
+                    background: #f0f0f0;
+                    padding:20px;
+                    border-radius:5px;
+                    cursor:pointer;
+                }             
+                #main ul li:hover{
+                    background: #c72020;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.096);
+                }
+                #main .label{
+                    color:#c72020;
+                }
+                #main ul li:hover .label{
+                    color:#fff;
+                }
+                #main .time{
+                    color:#000000;
+                    font-size: 20px;
+                    margin-top: 5px;                    
+                } 
+                #main ul li:hover .time{
+                    color:#fff;
+                } 
+            hr{
+                height:1px;
+                background-color:#d0d0d0;
+                border:0;
+            } 
+            #legal{
+                margin-top:30px;
+                font-size:11px;
+                text-align:center;
+                color:#666;
+            }   
+            
+
+        @media only screen and (max-width: 800px) {
+            #main{
+                width: 70%;
+            }
+            #main ul li {
+                width:75%;
+                height:70px;
+            }
+            #main .time{
+                font-size: 30px;
+            }                     
+        }   
+
+
+        /* Load icon */
+        .loadIcon {
+            display: inline-block;
+            position: relative;
+            width: 70px;
+            height: 50px;
+            }
+        .loadIcon div {
+            position: absolute;
+            top: 30px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.089);
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+            }
+        .loadIcon div:nth-child(1) {
+            left: 8px;
+            animation: loadIcon1 0.6s infinite;
+            }
+        .loadIcon div:nth-child(2) {
+            left: 8px;
+            animation: loadIcon2 0.6s infinite;
+            }
+        .loadIcon div:nth-child(3) {
+            left: 32px;
+            animation: loadIcon2 0.6s infinite;
+            }
+        .loadIcon div:nth-child(4) {
+            left: 56px;
+            animation: loadIcon3 0.6s infinite;
+            }
+            @keyframes loadIcon1 {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+            }
+            @keyframes loadIcon3 {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0);
+            }
+            }
+            @keyframes loadIcon2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(24px, 0);
+            }
+            }
+
+    </style>
 </head>
-<body>
-    <h1>Canadá Visa - Processing Time - Brazil</h1>
-    <h3>?</h3>
+<body onLoad="populate()">
+    <div id="main">
+        <img src="https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg" id="flag" alt="Canadá"/>
+        <h1>Canadá Visa Processing Time Brazil</h1>
+        <ul>
+            <li><div class="label">Visitor Outside Canada</div><div class="time" id="VOC"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Supervisa</div><div class="time" id="SUP"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Study</div><div class="time" id="STD"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Work</div><div class="time" id="WOR"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Child Dependent</div><div class="time" id="CHD"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Child Adopted</div><div class="time" id="CHA"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Refugees Gov</div><div class="time" id="REG"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+            <li><div class="label">Refugees Private</div><div class="time" id="REP"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
+        </ul>
+        <hr>
+        <div id="legal">
+            Unofficial page | Data live updated from  <a href="https://canada.ca" target="_blank">Canada.ca</a>
+            <br>My contribution to all dreamers | <a href="https://github.com/olavomello" target="_blank">Olavo Mello</a>
+        </div>
+    </div>
+    <script>
+        // Get data
+        async function populate(){
+            // Endpoint
+            const endPoint = "/get";
+            // Get data
+            const res   =   await fetch(endPoint);
+            const data  =   await res.json();
+            // Populate to page
+            for (const i in data){
+                var idx     = i;          console.log("idx",idx);
+                var idxVal  = data[i];    console.log("idxVal",idxVal);
+
+                // No processing time available
+                if( idxVal == "No processing time available" ) idxVal = "Unavailable";
+
+                // Apply data
+                document.getElementById(idx).innerHTML = idxVal;
+            }
+        }
+    </script>    
 </body>
 </html>
