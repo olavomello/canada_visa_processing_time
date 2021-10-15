@@ -101,21 +101,27 @@ async function connAdd( dataValues : any ): Promise<boolean>{
 }
 
 // Database select
-async function connSelect( tabName : string, dataSchema : object): Promise<boolean>{
-    // Check
-    await connection.findOne( dataSchema, ( error : any, result : any) => {
-        // Test error
-        if( error != undefined ) {
-            // Error
-            console.warn("Data add error :", error);
+async function connSelect( filter : object = {}): Promise<any>{
+    // Select all data 
+    // Empty filter = all
+    try{
+
+        // Check connection
+        if ( !isConnected ) await connStart();
+        if ( !isConnected ) {
+            // Connection error
             return false;
-        } else {
-            // Success
-            return true;
         }
-    }); 
-    // On await error
-    return false;
+                
+        const all = await GraphData.find(filter);
+        connEnd();
+        // Return
+        return all;
+    } catch(error){
+        // error
+        connEnd();
+        return error;
+    }
 }
 
 export {

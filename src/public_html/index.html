@@ -186,6 +186,10 @@
             <li><div class="label">Refugees Private</div><div class="time" id="REP"><span class="wait"><div class="loadIcon"><div></div><div></div><div></div></span></div></li>
         </ul>
         <hr>
+        <div id="chart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <hr>
         <div id="legal">
             Unofficial page | Data live updated from  <a href="https://canada.ca" target="_blank">Canada.ca</a>
             <br>My contribution to all dreamers | <a href="https://github.com/olavomello" target="_blank">Olavo Mello</a>
@@ -195,14 +199,14 @@
         // Get data
         async function populate(){
             // Endpoint
-            const endPoint = "/get";
+            const endPoint = "http://canada-visa-processing-time.herokuapp.com/get";
             // Get data
             const res   =   await fetch(endPoint);
             const data  =   await res.json();
             // Populate to page
             for (const i in data){
-                var idx     = i;          console.log("idx",idx);
-                var idxVal  = data[i];    console.log("idxVal",idxVal);
+                var idx     = i;          // console.log("idx",idx);
+                var idxVal  = data[i];    // console.log("idxVal",idxVal);
 
                 // No processing time available
                 if( idxVal == "No processing time available" ) idxVal = "Unavailable";
@@ -211,6 +215,44 @@
                 document.getElementById(idx).innerHTML = idxVal;
             }
         }
+    </script>    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js" integrity="sha256-bC3LCZCwKeehY6T4fFi9VfOU0gztUa+S4cnkIhVPZ5E=" crossorigin="anonymous"></script>
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
     </script>    
 </body>
 </html>

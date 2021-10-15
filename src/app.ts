@@ -5,7 +5,7 @@ import https from "https";
 import cors from "cors";
 
 // DB connection
-import { connAdd  } from './database'
+import { connAdd, connSelect  } from './database'
 
 // Start server
 const app = express();
@@ -39,6 +39,8 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 
 // Routes ---------
+
+// Get actual data 
 app.get('/get', (req, res) => {
 
     // URL
@@ -101,6 +103,31 @@ app.get('/get', (req, res) => {
       });
     });
 });
+
+// Get stored data 
+app.get('/chart', (req, res) => {
+  try{
+
+    // Requested data filter
+    const filter = ( req.body || {} );
+
+    // Request data
+    connSelect(filter)
+      .then(( data : any )=>{
+        // Data loaded
+        // Return
+        return res.json(data);
+      })
+      .catch((err : any )=>{
+        console.log("Data error >>", err );
+        // Return
+        return res.json({ error : true, err});    
+      });
+  } catch ( err ){
+    return res.json({ error : true, err}); 
+  };
+});
+
 
 // Index ---------
 app.get('/', function(req : any, res : any){

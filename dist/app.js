@@ -36,6 +36,7 @@ const corsOptions = {
 // Cors pre-flight  
 app.use(cors_1.default(corsOptions));
 // Routes ---------
+// Get actual data 
 app.get('/get', (req, res) => {
     // URL
     const URL = "https://www.canada.ca/content/dam/ircc/documents/json/data-ptime-en.json";
@@ -88,6 +89,30 @@ app.get('/get', (req, res) => {
             }
         });
     });
+});
+// Get stored data 
+app.get('/chart', (req, res) => {
+    try {
+        // Requested data filter
+        const filter = (req.body || {});
+        // Request data
+        database_1.connSelect(filter)
+            .then((data) => {
+            // Data loaded
+            console.log("Data >>", data);
+            // Return
+            return res.json(data);
+        })
+            .catch((err) => {
+            console.log("Data error >>", err);
+            // Return
+            return res.json({ error: true, err });
+        });
+    }
+    catch (err) {
+        return res.json({ error: true, err });
+    }
+    ;
 });
 // Index ---------
 app.get('/', function (req, res) {

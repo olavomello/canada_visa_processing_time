@@ -106,23 +106,28 @@ function connAdd(dataValues) {
 }
 exports.connAdd = connAdd;
 // Database select
-function connSelect(tabName, dataSchema) {
+function connSelect(filter = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Check
-        yield connection.findOne(dataSchema, (error, result) => {
-            // Test error
-            if (error != undefined) {
-                // Error
-                console.warn("Data add error :", error);
+        // Select all data 
+        // Empty filter = all
+        try {
+            // Check connection
+            if (!isConnected)
+                yield connStart();
+            if (!isConnected) {
+                // Connection error
                 return false;
             }
-            else {
-                // Success
-                return true;
-            }
-        });
-        // On await error
-        return false;
+            const all = yield GraphData.find(filter);
+            connEnd();
+            // Return
+            return all;
+        }
+        catch (error) {
+            // error
+            connEnd();
+            return error;
+        }
     });
 }
 exports.connSelect = connSelect;
