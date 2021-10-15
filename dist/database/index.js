@@ -14,8 +14,6 @@ exports.connSelect = exports.connAdd = exports.connEnd = exports.connStart = voi
 if (process.env.NODE_ENV != 'production')
     require('dotenv-safe').config({ silent: true });
 const mongoose_1 = require("mongoose");
-// Models
-const GraphData = require('./models/graph.js');
 // Config
 const HOST = (process.env.DB_HOST || '');
 const NAME = (process.env.DB_NAME || '');
@@ -24,6 +22,22 @@ const PASS = (process.env.DB_PASS || '');
 // Globals
 var isConnected = false;
 var connection = null;
+// Models
+const GraphSchema = new mongoose_1.Schema({
+    VOC: { type: String },
+    SUP: { type: String },
+    STD: { type: String },
+    WOR: { type: String },
+    CHD: { type: String },
+    CHA: { type: String },
+    REG: { type: String },
+    REP: { type: String },
+    createAt: {
+        type: Date,
+        default: new Date()
+    }
+}, { collection: 'processing_time_brazil' });
+const GraphData = mongoose_1.model('graph', GraphSchema);
 // Function connection start
 function connStart() {
     return __awaiter(this, void 0, void 0, function* () {

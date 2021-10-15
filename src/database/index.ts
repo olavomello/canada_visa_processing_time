@@ -1,9 +1,6 @@
 // MongoDB connection
 if ( process.env.NODE_ENV != 'production' )  require('dotenv-safe').config({ silent: true });
-import { connect } from 'mongoose';
-
-// Models
-const GraphData               =  require('./models/graph.js');
+import { connect, Schema, model } from 'mongoose';
 
 // Config
 const HOST : string           =  ( process.env.DB_HOST || '' );
@@ -14,6 +11,24 @@ const PASS : string           =  ( process.env.DB_PASS || '' );
 // Globals
 var isConnected : boolean = false;
 var connection : any = null;
+
+// Models
+const GraphSchema = new Schema({
+    VOC       : { type : String },
+    SUP       : { type : String },
+    STD       : { type : String },
+    WOR       : { type : String },
+    CHD       : { type : String },
+    CHA       : { type : String },
+    REG       : { type : String },
+    REP       : { type : String },
+    createAt  : {
+        type    : Date,
+        default : new Date()
+    }   
+},{ collection: 'processing_time_brazil' });
+const GraphData     =  model('graph', GraphSchema);
+
 
 // Function connection start
 async function connStart(): Promise<boolean>{
