@@ -4,6 +4,9 @@ import http from "http";
 import https from "https";
 import cors from "cors";
 
+// DB connection
+import { connAdd  } from './database'
+
 // Start server
 const app = express();
 const port = ( process.env.PORT || 3001 );
@@ -40,7 +43,8 @@ app.get('/get', (req, res) => {
 
     // URL
     const URL : string = "https://www.canada.ca/content/dam/ircc/documents/json/data-ptime-en.json";
-
+    
+    // Get JSON data
     https.get(URL, ( urlRes : any ) => {
       // Body
       let body = '';
@@ -69,9 +73,30 @@ app.get('/get', (req, res) => {
             
             // Send BR data   
             res.send({VOC,SUP,STD,WOR,CHD,CHA,REG,REP});
+            
+            // Save data chart
+            connAdd(
+                {
+                  VOC,
+                  SUP,
+                  STD,
+                  WOR,
+                  CHD,
+                  CHA,
+                  REG,
+                  REP,
+                  creatAt : new Date()                  
+                })
+              .then((response:any) => {
+                // Ok 
+              })
+              .catch((error:any) => {
+                console.error("connAdd error : ", error);
+              });
+
         } else {
             // Error
-            res.send("Request failed. status: " + urlRes.statusCode);
+            return res.send("Request failed. status: " + urlRes.statusCode);
         }
       });
     });

@@ -8,6 +8,8 @@ if (process.env.NODE_ENV != 'production')
 const express_1 = __importDefault(require("express"));
 const https_1 = __importDefault(require("https"));
 const cors_1 = __importDefault(require("cors"));
+// DB connection
+const database_1 = require("./database");
 // Start server
 const app = express_1.default();
 const port = (process.env.PORT || 3001);
@@ -37,6 +39,7 @@ app.use(cors_1.default(corsOptions));
 app.get('/get', (req, res) => {
     // URL
     const URL = "https://www.canada.ca/content/dam/ircc/documents/json/data-ptime-en.json";
+    // Get JSON data
     https_1.default.get(URL, (urlRes) => {
         // Body
         let body = '';
@@ -60,10 +63,28 @@ app.get('/get', (req, res) => {
                 const REP = jsonData["refugees_private"]["BR"];
                 // Send BR data   
                 res.send({ VOC, SUP, STD, WOR, CHD, CHA, REG, REP });
+                // Save data chart
+                database_1.connAdd({
+                    VOC,
+                    SUP,
+                    STD,
+                    WOR,
+                    CHD,
+                    CHA,
+                    REG,
+                    REP,
+                    creatAt: new Date()
+                })
+                    .then((response) => {
+                    // Ok 
+                })
+                    .catch((error) => {
+                    console.error("connAdd error : ", error);
+                });
             }
             else {
                 // Error
-                res.send("Request failed. status: " + urlRes.statusCode);
+                return res.send("Request failed. status: " + urlRes.statusCode);
             }
         });
     });
