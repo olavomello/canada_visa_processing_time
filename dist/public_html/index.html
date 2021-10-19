@@ -220,18 +220,6 @@
             }
         }
 
-        // Chart
-        var dataGraph;   
-        // Array data graph
-        var data1 = [];
-        var data2 = [];
-        var data3 = [];
-        var data4 = [];
-        var data5 = [];
-        var data6 = [];
-        var data7 = [];
-        var data8 = [];
-
         async function chart(){
             // MAP
             var ctx         =   document.getElementById('myChart').getContext('2d');
@@ -243,20 +231,36 @@
             const res       =   await fetch(endPoint);
             dataGraph       =   await res.json();   
 
+            // Chart
+            let dataGraph;   
+            // Array data graph
+            let labels = [];
+            let data1  = [];
+            let data2  = [];
+            let data3  = [];
+            let data4  = [];
+            let data5  = [];
+            let data6  = [];
+            let data7  = [];
+            let data8  = [];
+
             // Map dataGraph 
             dataGraph.map( (elem)=>{
                 // Type of visa 
                 const { VOC,SUP,STD,WOR,CHD,CHA,REG,REP, dte, dtef } = elem["col"];
 
+                // Labels
+                labels.push(dtef);
+
                 // Add data
-                data1.push({x: dte, y: VOC});
-                data2.push({x: dte, y: SUP});
-                data3.push({x: dte, y: STD});
-                data4.push({x: dte, y: WOR});
-                data5.push({x: dte, y: CHD});
-                data6.push({x: dte, y: CHA});
-                data7.push({x: dte, y: REG});
-                data8.push({x: dte, y: REP});
+                data1.push({x: dtef, y: VOC});
+                data2.push({x: dtef, y: SUP});
+                data3.push({x: dtef, y: STD});
+                data4.push({x: dtef, y: WOR});
+                data5.push({x: dtef, y: CHD});
+                data6.push({x: dtef, y: CHA});
+                data7.push({x: dtef, y: REG});
+                data8.push({x: dtef, y: REP});
             });
             // console.log("Dataset : ", data1,data2,data3,data4,data5,data6,data7,data8);
 
@@ -301,7 +305,7 @@
             const config = {
                         type: 'line',
                         data: {
-                            //labels  : ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                            labels  : labels,
                             datasets: [
                                 {
                                     id          : "VOC",
