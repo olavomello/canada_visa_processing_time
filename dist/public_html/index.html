@@ -223,14 +223,14 @@
         // Chart
         var dataGraph;   
         // Array data graph
-        const data1 = [];
-        const data2 = [];
-        const data3 = [];
-        const data4 = [];
-        const data5 = [];
-        const data6 = [];
-        const data7 = [];
-        const data8 = [];
+        var data1 = [];
+        var data2 = [];
+        var data3 = [];
+        var data4 = [];
+        var data5 = [];
+        var data6 = [];
+        var data7 = [];
+        var data8 = [];
 
         async function chart(){
             // MAP
@@ -303,48 +303,56 @@
                         data: {
                             datasets: [
                                 {
+                                    label       : "VOC",
                                     borderColor : "#a000c9",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data1,
                                 },
                                 {
+                                    label       : "SUP",
                                     borderColor : "#00a0c9",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data2,
                                 },
                                 {
+                                    label       : "STD",
                                     borderColor : "#af0055",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data3,
                                 }, 
                                 {
+                                    label       : "WOR",
                                     borderColor : "#df4331",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data4,
                                 }, 
                                 {
+                                    label       : "CHD",
                                     borderColor : "#03d342",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data5,
                                 }, 
                                 {
+                                    label       : "CHA",
                                     borderColor : "#938d33",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data6,
                                 },
                                 {
+                                    label       : "REG",
                                     borderColor : "#C1ee54",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
                                     data        : data7,
                                 },
                                 {
+                                    label       : "REP",
                                     borderColor : "#0033c9",
                                     borderWidth : chartBorder,
                                     radius      : chartRadius,
@@ -363,7 +371,23 @@
                             scales: {
                                 x: {
                                     type    : 'linear'
-                                }
+                                },
+                                xAxes: [{
+                                    type    : 'time',
+                                    time    : {
+                                        displayFormats: {
+                                            'millisecond'   : 'MMM DD',
+                                            'second'        : 'MMM DD',
+                                            'minute'        : 'MMM DD',
+                                            'hour'          : 'MMM DD',
+                                            'day'           : 'MMM DD',
+                                            'week'          : 'MMM DD',
+                                            'month'         : 'MMM DD',
+                                            'quarter'       : 'MMM DD',
+                                            'year'          : 'MMM DD',
+                                        }
+                                    }
+                                }],                                
                             }
                         }
                 };        
