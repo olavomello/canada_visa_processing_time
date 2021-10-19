@@ -296,8 +296,8 @@
             };       
             
             // Chart config
-            const chartBorder = 1;
-            const chartRadius = 1;
+            const chartBorder = 2;
+            const chartRadius = 3;
 
             // Set 
             const config = {
@@ -409,7 +409,22 @@
                                     }
                                 }],                                
                             }
-                        }
+                        },
+                        showTooltips: false,
+                        onAnimationComplete: function () {
+                            
+                            var ctx             =   this.chart.ctx;
+                            ctx.font            =   this.scale.font;
+                            ctx.fillStyle       =   this.scale.textColor
+                            ctx.textAlign       =   "center";
+                            ctx.textBaseline    =   "bottom";
+
+                            this.datasets.forEach(function (dataset) {
+                                dataset.points.forEach(function (points) {
+                                    ctx.fillText(points.value, points.x, points.y - 10);
+                                });
+                            })
+                        }                        
                 };        
             var myChart =   new Chart(ctx, config);
         }
