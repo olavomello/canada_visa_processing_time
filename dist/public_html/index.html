@@ -241,25 +241,22 @@
             
             // Get data
             const res       =   await fetch(endPoint);
-            dataGraph       =   await res.json();          
-            console.log("Data chart >>>", dataGraph);  
+            dataGraph       =   await res.json();   
 
             // Map dataGraph 
             dataGraph.map( (elem)=>{
-                console.log("Data : ", elem );
-
                 // Type of visa 
                 const { VOC,SUP,STD,WOR,CHD,CHA,REG,REP, dte, dtef } = elem["col"];
 
                 // Add data
-                data1.push({x: VOC, y: dte});
-                data2.push({x: SUP, y: dte});
-                data3.push({x: STD, y: dte});
-                data4.push({x: WOR, y: dte});
-                data5.push({x: CHD, y: dte});
-                data6.push({x: CHA, y: dte});
-                data7.push({x: REG, y: dte});
-                data8.push({x: REP, y: dte});
+                data1.push({y: VOC, x: dtef});
+                data2.push({y: SUP, x: dtef});
+                data3.push({y: STD, x: dtef});
+                data4.push({y: WOR, x: dtef});
+                data5.push({y: CHD, x: dtef});
+                data6.push({y: CHA, x: dtef});
+                data7.push({y: REG, x: dtef});
+                data8.push({y: REP, x: dtef});
             });
             console.log("Dataset : ", data1,data2,data3,data4,data5,data6,data7,data8);
 
