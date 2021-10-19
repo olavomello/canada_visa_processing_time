@@ -124,7 +124,7 @@ async function connSelect( filter : object = {} ): Promise<any>{
                 $group    : 
                     { 
                         _id: {
-                            dte     : { $dateToString: { format: "%Y-%m-%d-%H", date: "$createAt" } },
+                            dte     : { $dateToString: { format: "%Y%m%d%H", date: "$createAt" } },
                             dtef    : { $dateToString: { format: "%d/%m/%Y %Hhs", date: "$createAt" } },
                             VOC     : { $convert: { input:{ $replaceOne: { input: "$VOC", find: " days", replacement: "" } }, to: "int" }},
                             SUP     : { $convert: { input:{ $replaceOne: { input: "$SUP", find: "No processing time available", replacement: "0" } }, to: "int" }},
