@@ -222,6 +222,16 @@
 
         // Chart
         var dataGraph;   
+        // Array data graph
+        const data1 = [];
+        const data2 = [];
+        const data3 = [];
+        const data4 = [];
+        const data5 = [];
+        const data6 = [];
+        const data7 = [];
+        const data8 = [];
+
         async function chart(){
             // MAP
             var ctx         =   document.getElementById('myChart').getContext('2d');
@@ -234,22 +244,12 @@
             dataGraph       =   await res.json();          
             console.log("Data chart >>>", dataGraph);  
 
-            // Array data graph
-            const data1 = [];
-            const data2 = [];
-            const data3 = [];
-            const data4 = [];
-            const data5 = [];
-            const data6 = [];
-            const data7 = [];
-            const data8 = [];
-
             // Map dataGraph 
             dataGraph.map( (elem)=>{
                 console.log("Data : ", elem );
 
                 // Type of visa 
-                const { VOC,SUP,STD,WOR,CHD,CHA,REG,REP, dte } = elem["col"];
+                const { VOC,SUP,STD,WOR,CHD,CHA,REG,REP, dte, dtef } = elem["col"];
 
                 // Add data
                 data1.push({x: VOC, y: dte});
@@ -261,10 +261,11 @@
                 data7.push({x: REG, y: dte});
                 data8.push({x: REP, y: dte});
             });
+            console.log("Dataset : ", data1,data2,data3,data4,data5,data6,data7,data8);
 
             // Chart animation
             const totalDuration         = 1000;
-            const delayBetweenPoints    = totalDuration / data.length;
+            const delayBetweenPoints    = totalDuration / data1.length;
             const previousY             = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
             const animation = {
                 x: {
