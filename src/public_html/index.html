@@ -376,7 +376,21 @@
                             responsive      : true,
                             animation,
                                 interaction : {
-                                intersect   : false
+                                intersect   : false,
+                                onComplete : function(){
+                                                // Add fixed legend on chart
+                                                let ctx             =   this.chart.ctx;
+                                                ctx.font            =   this.scale.font;
+                                                ctx.fillStyle       =   this.scale.textColor
+                                                ctx.textAlign       =   "center";
+                                                ctx.textBaseline    =   "bottom";
+
+                                                this.datasets.forEach(function (dataset) {
+                                                    dataset.points.forEach(function (points) {
+                                                        ctx.fillText( (points.value + " days"), points.x, points.y - 10);
+                                                    });
+                                                });
+                                            }                                
                             },
                             plugins: [{
                                 legend      : false,
@@ -412,24 +426,7 @@
                             }
                         },                      
                 };        
-            var myChart =   new Chart(ctx).Line(config, {
-                                onAnimationComplete: function () {
-
-                                    // Add fixed legend on chart
-                                    var ctx             =   this.chart.ctx;
-                                    ctx.font            =   this.scale.font;
-                                    ctx.fillStyle       =   this.scale.textColor
-                                    ctx.textAlign       =   "center";
-                                    ctx.textBaseline    =   "bottom";
-
-                                    this.datasets.forEach(function (dataset) {
-                                        dataset.points.forEach(function (points) {
-                                            ctx.fillText( (points.value + " days"), points.x, points.y - 10);
-                                        });
-                                    });
-
-                                }
-                            });
+            var myChart =   new Chart(ctx, config);
         }
         // INI
         populate();
