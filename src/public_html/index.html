@@ -249,14 +249,14 @@
                 const { VOC,SUP,STD,WOR,CHD,CHA,REG,REP, dte, dtef } = elem["col"];
 
                 // Add data
-                data1.push({y: VOC, x: dtef});
-                data2.push({y: SUP, x: dtef});
-                data3.push({y: STD, x: dtef});
-                data4.push({y: WOR, x: dtef});
-                data5.push({y: CHD, x: dtef});
-                data6.push({y: CHA, x: dtef});
-                data7.push({y: REG, x: dtef});
-                data8.push({y: REP, x: dtef});
+                data1.push({x: dte, y: VOC});
+                data2.push({x: dte, y: SUP});
+                data3.push({x: dte, y: STD});
+                data4.push({x: dte, y: WOR});
+                data5.push({x: dte, y: CHD});
+                data6.push({x: dte, y: CHA});
+                data7.push({x: dte, y: REG});
+                data8.push({x: dte, y: REP});
             });
             console.log("Dataset : ", data1,data2,data3,data4,data5,data6,data7,data8);
 
@@ -301,8 +301,10 @@
             const config = {
                         type: 'line',
                         data: {
+                            labels  : ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                             datasets: [
                                 {
+                                    id          : "VOC",
                                     label       : "VOC",
                                     borderColor : "#a000c9",
                                     borderWidth : chartBorder,
@@ -310,6 +312,7 @@
                                     data        : data1,
                                 },
                                 {
+                                    id          : "SUP",
                                     label       : "SUP",
                                     borderColor : "#00a0c9",
                                     borderWidth : chartBorder,
@@ -317,6 +320,7 @@
                                     data        : data2,
                                 },
                                 {
+                                    id          : "STD",
                                     label       : "STD",
                                     borderColor : "#af0055",
                                     borderWidth : chartBorder,
@@ -324,6 +328,7 @@
                                     data        : data3,
                                 }, 
                                 {
+                                    id          : "WOR",
                                     label       : "WOR",
                                     borderColor : "#df4331",
                                     borderWidth : chartBorder,
@@ -331,6 +336,7 @@
                                     data        : data4,
                                 }, 
                                 {
+                                    id          : "CHD",
                                     label       : "CHD",
                                     borderColor : "#03d342",
                                     borderWidth : chartBorder,
@@ -338,6 +344,7 @@
                                     data        : data5,
                                 }, 
                                 {
+                                    id          : "CHA",
                                     label       : "CHA",
                                     borderColor : "#938d33",
                                     borderWidth : chartBorder,
@@ -345,6 +352,7 @@
                                     data        : data6,
                                 },
                                 {
+                                    id          : "REG",
                                     label       : "REG",
                                     borderColor : "#C1ee54",
                                     borderWidth : chartBorder,
@@ -352,6 +360,7 @@
                                     data        : data7,
                                 },
                                 {
+                                    id          : "REP",
                                     label       : "REP",
                                     borderColor : "#0033c9",
                                     borderWidth : chartBorder,
