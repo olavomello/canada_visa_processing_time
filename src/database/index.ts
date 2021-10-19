@@ -124,7 +124,8 @@ async function connSelect( filter : object = {} ): Promise<any>{
                 $group    : 
                     { 
                         _id: {
-                            dte     : { $dateToString: { format: "%d/%m/%Y", date: "$createAt" } },
+                            dte     : { $dateToString: { format: "%Y-%m-%d-%H", date: "$createAt" } },
+                            dtef    : { $dateToString: { format: "%d/%m/%Y %Hhs", date: "$createAt" } },
                             VOC     : { $convert: { input:{ $replaceOne: { input: "$VOC", find: " days", replacement: "" } }, to: "int" }},
                             SUP     : { $convert: { input:{ $replaceOne: { input: "$SUP", find: "No processing time available", replacement: "0" } }, to: "int" }},
                             STD     : { $multiply: [ { $convert: { input:{ $replaceOne: { input: "$STD", find: " weeks", replacement: "" }}, to: "int" }},7 ]},
@@ -141,7 +142,22 @@ async function connSelect( filter : object = {} ): Promise<any>{
                     {
                         _id   : 1 /* _id ASC */
                     }
-            }  
+            },
+            { 
+                $project: {  
+                    _id     :   0,
+                    col     :   "$_id",
+                    VOC     :   "$VOC",
+                    SUP     :   "$SUP",
+                    STD     :   "$STD",
+                    WOR     :   "$WOR",
+                    CHD     :   "$CHD",
+                    CHA     :   "$CHA",
+                    REG     :   "$REG",
+                    REP     :   "$REP",
+                    dte     :   "$dte"
+                }
+            }             
         ]); 
         // End connection
         connEnd();
