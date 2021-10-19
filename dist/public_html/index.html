@@ -229,20 +229,18 @@
             
             // Get data
             const res       =   await fetch(endPoint);
-            dataGraph       =   await res.json();   
-
-            // Chart
-            let dataGraph;   
+            const dataGraph =   await res.json();   
+ 
             // Array data graph
-            let labels = [];
-            let data1  = [];
-            let data2  = [];
-            let data3  = [];
-            let data4  = [];
-            let data5  = [];
-            let data6  = [];
-            let data7  = [];
-            let data8  = [];
+            const labels    =   [];
+            const data1     =   [];
+            const data2     =   [];
+            const data3     =   [];
+            const data4     =   [];
+            const data5     =   [];
+            const data6     =   [];
+            const data7     =   [];
+            const data8     =   [];
 
             // Map dataGraph 
             dataGraph.map( (elem)=>{
