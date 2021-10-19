@@ -371,28 +371,14 @@
                                 },                                                                                                                                                                                                
                             ]
                         },
-                        options: {
-                            onAnimationComplete: function () {
-                                console.log("Ok");
-                                var ctx             =   this.chart.ctx;
-                                ctx.font            =   this.scale.font;
-                                ctx.fillStyle       =   this.scale.textColor
-                                ctx.textAlign       =   "center";
-                                ctx.textBaseline    =   "bottom";
-
-                                this.datasets.forEach(function (dataset) {
-                                    dataset.points.forEach(function (points) {
-                                        ctx.fillText(points.value, points.x, points.y - 10);
-                                    });
-                                })
-                            },                            
+                        options: {                           
                             showTooltips    : false,                             
                             responsive      : true,
                             animation,
                                 interaction : {
                                 intersect   : false
                             },
-                            plugins: {
+                            plugins: [{
                                 legend      : false,
                                 tooltip     : {
                                                 callbacks: {
@@ -400,8 +386,32 @@
                                                         return data['labels'][tooltipItem[0]['index']];
                                                     },                                                   
                                                 }
-                                            }                                
-                            },
+                                            },
+                                            afterDatasetsDraw: function(chart) {
+                                                var ctx = chart.ctx;
+                                                chart.data.datasets.forEach(function(dataset, index) {
+                                                    var datasetMeta = chart.getDatasetMeta(index);
+                                                    if (datasetMeta.hidden) return;
+                                                    datasetMeta.data.forEach(function(point, index) {
+                                                        var value = dataset.data[index],
+                                                            x = point.getCenterPoint().x,
+                                                            y = point.getCenterPoint().y,
+                                                            radius      = point._model.radius,
+                                                            fontSize    = 14,
+                                                            fontFamily  = 'Verdana',
+                                                            fontColor   = 'black',
+                                                            fontStyle   = 'normal';
+                                                        ctx.save();
+                                                        ctx.textBaseline    = 'middle';
+                                                        ctx.textAlign       = 'center';
+                                                        ctx.font = fontStyle + ' ' + fontSize + 'px' + ' ' + fontFamily;
+                                                        ctx.fillStyle = fontColor;
+                                                        ctx.fillText(value, x, y - radius - fontSize);
+                                                        ctx.restore();
+                                                    });
+                                                });
+                                            }                                                                              
+                            }],
                             scales: {
                                 x: {
                                     type    : 'linear'
