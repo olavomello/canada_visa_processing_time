@@ -118,10 +118,38 @@ function connSelect(filter = {}) {
                 // Connection error
                 return false;
             }
-            const all = yield GraphData.find(filter);
+            // Result 
+            let result;
+            // Await select
+            result = yield GraphData.aggregate([
+                {
+                    $match: filter
+                },
+                {
+                    $group: {
+                        _id: {
+                            dte: { $dateToString: { format: "%d/%m/%Y", date: "$createAt" } },
+                            VOC: { $convert: { input: { $replaceOne: { input: "$VOC", find: " days", replacement: "" } }, to: "int" } },
+                            SUP: { $convert: { input: { $replaceOne: { input: "$SUP", find: "No processing time available", replacement: "0" } }, to: "int" } },
+                            STD: { $multiply: [{ $convert: { input: { $replaceOne: { input: "$STD", find: " weeks", replacement: "" } }, to: "int" } }, 7] },
+                            WOR: { $multiply: [{ $convert: { input: { $replaceOne: { input: "$WOR", find: " weeks", replacement: "" } }, to: "int" } }, 7] },
+                            CHD: { $convert: { input: { $replaceOne: { input: "$CHD", find: "No processing time available", replacement: "0" } }, to: "int" } },
+                            CHA: { $convert: { input: { $replaceOne: { input: "$CHA", find: "No processing time available", replacement: "0" } }, to: "int" } },
+                            REG: { $convert: { input: { $replaceOne: { input: "$REG", find: "No processing time available", replacement: "0" } }, to: "int" } },
+                            REP: { $convert: { input: { $replaceOne: { input: "$REP", find: "No processing time available", replacement: "0" } }, to: "int" } },
+                        }
+                    }
+                },
+                {
+                    $sort: {
+                        _id: 1 /* _id ASC */
+                    }
+                }
+            ]);
+            // End connection
             connEnd();
             // Return
-            return all;
+            return result;
         }
         catch (error) {
             // error

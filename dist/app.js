@@ -99,7 +99,6 @@ app.get('/chart', (req, res) => {
         database_1.connSelect(filter)
             .then((data) => {
             // Data loaded
-            console.log("Data >>", data);
             // Return
             return res.json(data);
         })

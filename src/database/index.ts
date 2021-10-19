@@ -29,7 +29,6 @@ const GraphSchema = new Schema({
 },{ collection: 'processing_time_brazil' });
 const GraphData     =  model('graph', GraphSchema);
 
-
 // Function connection start
 async function connStart(): Promise<boolean>{
     
@@ -101,7 +100,7 @@ async function connAdd( dataValues : any ): Promise<boolean>{
 }
 
 // Database select
-async function connSelect( filter : object = {}): Promise<any>{
+async function connSelect( filter : object = {} ): Promise<any>{
     // Select all data 
     // Empty filter = all
     try{
@@ -112,11 +111,43 @@ async function connSelect( filter : object = {}): Promise<any>{
             // Connection error
             return false;
         }
-                
-        const all = await GraphData.find(filter);
+            
+        // Result 
+        let result;
+
+        // Await select
+        result = await GraphData.aggregate([
+            {
+                $match    : filter
+            },
+            {
+                $group    : 
+                    { 
+                        _id: {
+                            dte     : { $dateToString: { format: "%d/%m/%Y", date: "$createAt" } },
+                            VOC     : { $convert: { input:{ $replaceOne: { input: "$VOC", find: " days", replacement: "" } }, to: "int" }},
+                            SUP     : { $convert: { input:{ $replaceOne: { input: "$SUP", find: "No processing time available", replacement: "0" } }, to: "int" }},
+                            STD     : { $multiply: [ { $convert: { input:{ $replaceOne: { input: "$STD", find: " weeks", replacement: "" }}, to: "int" }},7 ]},
+                            WOR     : { $multiply: [ { $convert: { input:{ $replaceOne: { input: "$WOR", find: " weeks", replacement: "" }}, to: "int" }},7 ]},
+                            CHD     : { $convert: { input:{ $replaceOne: { input: "$CHD", find: "No processing time available", replacement: "0" } }, to: "int" }},
+                            CHA     : { $convert: { input:{ $replaceOne: { input: "$CHA", find: "No processing time available", replacement: "0" } }, to: "int" }},
+                            REG     : { $convert: { input:{ $replaceOne: { input: "$REG", find: "No processing time available", replacement: "0" } }, to: "int" }},
+                            REP     : { $convert: { input:{ $replaceOne: { input: "$REP", find: "No processing time available", replacement: "0" } }, to: "int" }},                             
+                        }                  
+                    }
+            },
+            {
+                $sort : 
+                    {
+                        _id   : 1 /* _id ASC */
+                    }
+            }  
+        ]); 
+        // End connection
         connEnd();
+        
         // Return
-        return all;
+        return result;
     } catch(error){
         // error
         connEnd();
