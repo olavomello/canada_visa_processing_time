@@ -381,11 +381,9 @@
                                 legend      : false,
                                 tooltip     : {
                                                 callbacks: {
-                                                    label: function(context) {
-                                                        var label = context.dataset.label || '';
-                                                        if (label) label += ' days';
-                                                        return label;
-                                                    }
+                                                    title: function(tooltipItem, data) {
+                                                        return data['labels'][tooltipItem[0]['index']];
+                                                    },                                                   
                                                 }
                                             }                                
                             },
@@ -404,7 +402,7 @@
                                             'hour'          : 'MMM DD',
                                             'day'           : 'MMM DD',
                                             'week'          : 'MMM DD',
-                                            'month'         : 'MMM DD',
+                                            'month'         : 'MMM DD', 
                                             'quarter'       : 'MMM DD',
                                             'year'          : 'MMM DD',
                                         }
