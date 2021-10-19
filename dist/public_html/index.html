@@ -227,15 +227,22 @@
             var ctx         =   document.getElementById('myChart').getContext('2d');
             
             // Chart Data
-            const endPoint  = "/chart";
+            const endPoint  =   "/chart";
             
             // Get data
             const res       =   await fetch(endPoint);
             dataGraph       =   await res.json();          
-            console.log("data chart >>>", dataDB);  
+            console.log("Data chart >>>", dataDB);  
 
             // Array data graph
-            const data1, data2, data3, data4, data5, data6, data7, data8      =   [];
+            const data1 = [];
+            const data2 = [];
+            const data3 = [];
+            const data4 = [];
+            const data5 = [];
+            const data6 = [];
+            const data7 = [];
+            const data8 = [];
 
             // Map dataGraph 
             dataGraph.map( (elem)=>{
