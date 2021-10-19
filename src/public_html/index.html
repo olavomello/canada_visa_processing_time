@@ -221,38 +221,39 @@
         }
 
         // Chart
+        var dataGraph;   
         async function chart(){
             // MAP
-            var ctx     =   document.getElementById('myChart').getContext('2d');
+            var ctx         =   document.getElementById('myChart').getContext('2d');
             
             // Chart Data
+            const endPoint  = "/chart";
             
-            // Endpoint
-            const endPoint = "/chart";
             // Get data
             const res       =   await fetch(endPoint);
-            const dataDB    =   await res.json();          
+            dataGraph       =   await res.json();          
             console.log("data chart >>>", dataDB);  
 
-            const data  = [];
-            const data2 = [];
-            
-            // Max
-            let max     = 1000;
-            
-            // Start data 
-            let prev    = 100;
-            let prev2   = 80;
+            // Array data graph
+            const data1, data2, data3, data4, data5, data6, data7, data8      =   [];
 
-            for (let i = 0; i <= max; i++) {
-                // Data 1
-                prev += 5 - Math.random() * 10;
-                data.push({x: i, y: prev});
-                
-                // Data 2
-                prev2 += 5 - Math.random() * 10;
-                data2.push({x: i, y: prev2});
-            }
+            // Map dataGraph 
+            dataGraph.map( (elem)=>{
+                console.log("Data : ", elem );
+
+                // Type of visa 
+                const { VOC,SUP,STD,WOR,CHD,CHA,REG,REP, dte } = elem["col"];
+
+                // Add data
+                data1.push({x: VOC, y: dte});
+                data2.push({x: SUP, y: dte});
+                data3.push({x: STD, y: dte});
+                data4.push({x: WOR, y: dte});
+                data5.push({x: CHD, y: dte});
+                data6.push({x: CHA, y: dte});
+                data7.push({x: REG, y: dte});
+                data8.push({x: REP, y: dte});
+            });
 
             // Chart animation
             const totalDuration         = 1000;
@@ -295,18 +296,56 @@
             const config = {
                         type: 'line',
                         data: {
-                            datasets: [{
-                                borderColor : "#a000c9",
-                                borderWidth : chartBorder,
-                                radius      : chartRadius,
-                                data        : data,
-                            },
-                            {
-                                borderColor : "#00a0c9",
-                                borderWidth : chartBorder,
-                                radius      : chartRadius,
-                                data        : data2,
-                            }]
+                            datasets: [
+                                {
+                                    borderColor : "#a000c9",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data1,
+                                },
+                                {
+                                    borderColor : "#00a0c9",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data2,
+                                },
+                                {
+                                    borderColor : "#af0055",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data3,
+                                }, 
+                                {
+                                    borderColor : "#df4331",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data4,
+                                }, 
+                                {
+                                    borderColor : "#03d342",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data5,
+                                }, 
+                                {
+                                    borderColor : "#938d33",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data6,
+                                },
+                                {
+                                    borderColor : "#C1ee54",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data7,
+                                },
+                                {
+                                    borderColor : "#0033c9",
+                                    borderWidth : chartBorder,
+                                    radius      : chartRadius,
+                                    data        : data8,
+                                },                                                                                                                                                                                                
+                            ]
                         },
                         options: {
                             animation,
