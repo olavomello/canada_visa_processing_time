@@ -372,18 +372,29 @@
                             ]
                         },
                         options: {
+                            responsive      : true,
                             animation,
                                 interaction : {
                                 intersect   : false
                             },
                             plugins: {
-                                legend      : false
+                                legend      : false,
+                                tooltip     : {
+                                                callbacks: {
+                                                    label: function(context) {
+                                                        var label = context.dataset.label || '';
+                                                        if (label) label += ' days';
+                                                        return label;
+                                                    }
+                                                }
+                                            }                                
                             },
                             scales: {
                                 x: {
                                     type    : 'linear'
                                 },
                                 xAxes: [{
+                                    ticks   : { display: false }, // Remove label                                    
                                     type    : 'time',
                                     time    : {
                                         displayFormats: {
