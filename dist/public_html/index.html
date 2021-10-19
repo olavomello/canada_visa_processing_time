@@ -220,10 +220,10 @@
             }
         }
 
-        async function chart(){
-            // MAP
-            var ctx         =   document.getElementById('myChart').getContext('2d');
-            
+        // Chart obj
+        var ctx             =   document.getElementById('myChart').getContext('2d');
+        
+        async function chart(){            
             // Chart Data
             const endPoint  =   "/chart";
             
@@ -413,8 +413,8 @@
                         },                      
                 };        
             var myChart =   new Chart(ctx).Line(config, {
-                                showTooltips    : false,
                                 onAnimationComplete: function () {
+
                                     // Add fixed legend on chart
                                     var ctx             =   this.chart.ctx;
                                     ctx.font            =   this.scale.font;
@@ -424,9 +424,10 @@
 
                                     this.datasets.forEach(function (dataset) {
                                         dataset.points.forEach(function (points) {
-                                            ctx.fillText(points.value, points.x, points.y - 10);
+                                            ctx.fillText( (points.value + " days"), points.x, points.y - 10);
                                         });
-                                    })
+                                    });
+
                                 }
                             });
         }
