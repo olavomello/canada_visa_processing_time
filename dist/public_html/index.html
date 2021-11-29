@@ -99,6 +99,12 @@
             
 
         @media only screen and (max-width: 800px) {
+            #chart {
+                position: relative;
+                height: auto;
+                width: 100%;
+            }
+
             #main{
                 width: 70%;
             }
@@ -188,7 +194,7 @@
         <hr>
         <div id="chart">
             <h2>Time Projection ( in days )</h2>
-            <canvas id="myChart" width="400" height="200"></canvas>
+            <canvas id="myChart" width="600" height="250"></canvas>
         </div>
         <hr>
         <div id="legal">
@@ -296,11 +302,13 @@
             };       
             
             // Chart config
-            const chartBorder = 1;
-            const chartRadius = 3;
+            const chartBorder = 2;
+            const chartRadius = 1;
 
             // Set 
             const config = {
+                        responsive:true,
+                        maintainAspectRatio:false,
                         type: 'line',
                         data: {
                             // labels  : labels,
@@ -372,7 +380,7 @@
                             ]
                         },
                         options: {                           
-                            showTooltips    : false,                             
+                            showTooltips    : true,                     
                             responsive      : true,
                             animation,
                                 interaction : {
@@ -387,7 +395,7 @@
 
                                                 this.datasets.forEach(function (dataset) {
                                                     dataset.points.forEach(function (points) {
-                                                        ctx.fillText( (points.value + " days"), points.x, points.y - 10);
+                                                        ctx.fillText( ( (points.value/7) + " weeks"), points.x, points.y - 10);
                                                     });
                                                 });
                                             }                                
@@ -396,8 +404,15 @@
                                 legend      : false,
                                 tooltip     : {
                                                 callbacks: {
+                                                    label: (context) => {
+                                                        const label = context.dataset.label || '';
+                                                        console.log(label);
+                                                        return label;
+                                                    },                                                    
                                                     title: function(tooltipItem, data) {
-                                                        return data['labels'][tooltipItem[0]['index']];
+                                                        const title = data['labels'][tooltipItem[0]['index']];
+                                                        console.log(title);
+                                                        return title;
                                                     },                                                   
                                                 }
                                             }                                                                           
